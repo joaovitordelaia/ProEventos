@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using ProEventos.API.Data;
 using ProEventos.API.Models;
 
 namespace ProEventos.API.Controllers
@@ -19,37 +21,24 @@ namespace ProEventos.API.Controllers
      /*public EventoController(ILogger<EventoController> logger)
      {          
      }*/
-
-     public IEnumerable<Evento> _events = new Evento[]{ 
-                    new Evento(){
-                         EventoId = 1,
-                         Local = "Linhares",
-                         DataEvento = DateTime.Now.AddDays(2).ToString(),
-                         Tema = "video aula",
-                         qntPessoas = 2,
-                         Lote = "1º lote"
-                         },
-                    new Evento(){
-                         EventoId = 2,
-                         Local = "LinsCity",
-                         DataEvento = DateTime.Now.AddDays(3).ToString(),
-                         Tema = "video aula parte 2",
-                         qntPessoas = 3,
-                         Lote = "3º lote"
-                         }
-             };
+        private readonly DataContext context;
      
+     public EventoController(DataContext context)
+     {
+            this.context = context;
+     }
+
 
      [HttpGet]
      public IEnumerable<Evento> Get()
      {
-          return _events;
+          return context.Eventos;
      }
 
      [HttpGet("{id}")]
-     public IEnumerable<Evento> GetbyId(int id)
+     public Evento GetbyId(int id)
      {
-          return _events.Where(evento => evento.EventoId == id);
+          return context.Eventos.FirstOrDefault(evento => evento.EventoId == id);
      }
 
      [HttpPost]
@@ -65,7 +54,7 @@ namespace ProEventos.API.Controllers
      [HttpDelete("{id}")]
      public string Delete(int id)
      {
-          return $"Valor de Delete em id = {id}";
+          return "coonstruindoooo";
      } 
 
 
