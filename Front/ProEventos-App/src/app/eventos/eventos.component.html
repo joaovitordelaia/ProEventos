@@ -1,11 +1,63 @@
-<h1>Eventos do components</h1>
-<div *ngFor="let event of eventos">
-
-<p> <b>Tema: </b>{{event.tema}}</p>
-<p> <b>Local: </b>{{event.local}}</p>
-<p> <b>Data do Evento: </b>{{event.dataEvento}}</p>
-<p> <b>Quantidade de Pessoas: </b>{{event.qntPessoas}} Pessoa(s)</p>
-<p> <b>Lote: </b>{{event.lote}}º</p>
-<p> <b>imageURL: </b>{{event.imageURL}}</p>
+<h2>Eventos</h2>
 <hr>
+
+<div action="" class="form-inline">
+  <div class="form group mb-2">
+    <th>Filtro: </th>
+    <input
+    type="text"
+    class="form-control mr-2"
+    placeholder="buscar"
+    [(ngModel)]="filtroLista"
+    >
+  </div>
 </div>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        <button
+          (click)= "onHeaderClick()"
+          type="button"
+          class="btn btn-outline-light btn-sm">
+          {{mostrarImagem ? 'Mostrar' : 'Ocultar'}}
+        </button>
+    </th>
+      <th>#</th>
+      <th>Tema</th>
+      <th>Local</th>
+      <th>Data:</th>
+      <th>Qtn Pessoa</th>
+      <th>Lote</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="eventos && eventos.length">
+    <tr *ngFor="let event of eventosFiltrados">
+      <td><img src="/assets/{{event.imageURL}}"
+         [style.width.px]="imageSize"
+         [style.margin.px]="imageMargin"
+         [collapse]="mostrarImagem" [isAnimated]="true"
+         >
+      </td>
+      <td>{{event.eventoId}}</td>
+      <td>{{event.tema}}</td>
+      <td>{{event.local}}</td>
+      <td>{{event.dataEvento}}</td>
+      <td>{{event.qntPessoas}} Pessoa(s)</td>
+      <td>{{event.lote}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm mr-2">Deletar</button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!eventos.length">
+    <tr>
+      <td colspan="8" class = "text-center">
+        <h4>Nenhum evento encontrado!</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+

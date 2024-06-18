@@ -1,4 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.scss */
+
+/* Importando estilos de bibliotecas */
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
-@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Estilos globais */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilos para o contêiner principal */
+.conteiner {
+  padding-left: 50px; /* Ajuste este valor conforme necessário */
+  padding-right: 50px; /* Ajuste este valor conforme necessário */
+}
+
+/* Estilos para o componente app-eventos */
+.conteiner app-eventos {
+  width: 50%; /* Define a largura desejada */
+  margin: 0 auto; /* Centraliza o componente dentro do contêiner */
+}
